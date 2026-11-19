@@ -200,6 +200,52 @@
       .included li{display:flex;gap:10px;font-size:15px;color:var(--ink-soft);align-items:flex-start}
       .included li svg{flex:none;margin-top:3px;color:var(--green)}
 
+      /* ---------- whats new / trust / example / personas / calculator / compare ---------- */
+      .whats-new{background:var(--gold-bg);border-bottom:1px solid var(--gold-line);padding:10px 0;font-size:14px;font-weight:700;color:#6d4c02;text-align:center}
+      .whats-new strong{color:var(--ink)}
+      .trust-strip{border-bottom:1px solid var(--line);background:#fff;padding:18px 0}
+      .trust-strip .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:center;align-items:center}
+      .trust-item{display:inline-flex;gap:8px;align-items:flex-start;font-size:14.5px;font-weight:700;color:var(--ink-soft);max-width:320px}
+      .trust-item svg{flex:none;margin-top:3px;color:var(--green)}
+      .trust-item strong{color:var(--ink)}
+      .example-box{background:#fff;border:1px solid var(--line);border-radius:18px;padding:32px;max-width:920px;margin:0 auto}
+      .sample-badge{display:inline-block;background:var(--red-bg);color:var(--red);border:1px solid #f3b8bc;font-size:11.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+      .example-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:22px}
+      @media(max-width:820px){.example-steps{grid-template-columns:1fr 1fr}}
+      @media(max-width:520px){.example-steps{grid-template-columns:1fr}}
+      .ex-step{border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--bg-alt)}
+      .ex-step .n{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+      .ex-step h4{font-family:var(--font-head);font-size:16px;margin:0 0 8px}
+      .ex-step p{font-size:14.5px;color:var(--ink-soft)}
+      .ex-step .amt{font-family:var(--font-head);font-weight:800;font-size:20px;margin-top:10px}
+      .ex-step .amt.pos{color:var(--green)} .ex-step .amt.neg{color:var(--red)}
+      .example-foot{margin-top:18px;font-size:13.5px;color:var(--ink-faint);font-weight:600;text-align:center}
+      .persona-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+      @media(max-width:820px){.persona-grid{grid-template-columns:1fr}}
+      .persona{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px}
+      .persona h3{font-size:18px;margin-bottom:8px}
+      .persona .role{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+      .persona p{font-size:15px;color:var(--ink-soft)}
+      .calc-box{background:var(--bg-deep);color:#fff;border-radius:20px;padding:36px;display:grid;grid-template-columns:1fr 1fr;gap:36px}
+      @media(max-width:820px){.calc-box{grid-template-columns:1fr;padding:28px 22px}}
+      .calc-box h2{font-size:28px;margin-bottom:10px} .calc-box p{color:#c3d5ea;font-size:15.5px}
+      .calc-field{margin-bottom:22px} .calc-field label{display:flex;justify-content:space-between;font-weight:700;font-size:15px;margin-bottom:8px}
+      .calc-field label output{color:var(--gold-bright);font-family:var(--font-head)}
+      .calc-field input[type=range]{width:100%;accent-color:var(--orange)}
+      .calc-field input[type=number]{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-size:16px;font-weight:700}
+      .calc-result{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:24px}
+      .calc-result .row{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);font-size:15.5px}
+      .calc-result .row:last-child{border:none} .calc-result .big{font-family:var(--font-head);font-weight:800;font-size:22px}
+      .calc-note{font-size:13px;color:#9db4cc;margin-top:14px;line-height:1.5}
+      .compare-wrap{margin-top:36px;overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:16px}
+      table.compare{width:100%;border-collapse:collapse;font-size:14.5px}
+      @media(max-width:600px){table.compare{font-size:13px}table.compare th,table.compare td{padding:10px 10px}}
+      table.compare th,table.compare td{padding:12px 16px;border-bottom:1px solid #eef3fa;text-align:left;vertical-align:top}
+      table.compare thead th{font-family:var(--font-head);font-size:15px;background:var(--bg-alt)}
+      table.compare td.c,table.compare th.c{text-align:center}
+      table.compare .yes{color:var(--green);font-weight:800} table.compare .no{color:var(--ink-faint)}
+      .toggle span.active{color:var(--ink)} .toggle span{color:var(--ink-faint)}
+
       /* ---------- guarantee ---------- */
       .guarantee{border:2px solid var(--blue);border-radius:20px;padding:40px;display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;background:#fff}
       @media(max-width:820px){.guarantee{grid-template-columns:1fr;padding:30px 24px}}
@@ -265,6 +311,7 @@
         <a class="btn btn-orange btn-sm" href="#pricing">Start free 14-day trial</a>
       </div>
     </header>
+    <div class="whats-new"><div class="wrap"><strong>What&rsquo;s new —</strong> New in v0.14: the Growth Assistant — a 30-day plan built from your own numbers. <a href="#features" style="color:var(--blue)">See it in Features</a></div></div>
 
     <main>
       <!-- ================= HERO ================= -->
@@ -312,6 +359,17 @@
         </div>
       </section>
 
+      <!-- ================= TRUST STRIP ================= -->
+      <div class="trust-strip" aria-label="Key facts">
+        <div class="wrap">
+          <span class="trust-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>14-day trial</strong> — full access to test with your own products</span></span>
+          <span class="trust-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>No card</strong> required to start the trial</span></span>
+          <span class="trust-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Your data stays on your computer</strong> — desktop app, local storage</span></span>
+          <span class="trust-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>30-day money-back guarantee</strong> — <a href="#guarantee">conditions in plain language</a></span></span>
+          <span class="trust-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Support from the people who built it</strong> — email + Telegram</span></span>
+        </div>
+      </div>
+
       <!-- ================= PAINS ================= -->
       <section>
         <div class="wrap">
@@ -354,6 +412,31 @@
               <h3>So you clone winners, not maybes</h3>
               <p>Once you know your top pins by real earnings, you duplicate what works and stop feeding what doesn&rsquo;t. Your next month of content is built on proof, not hunches.</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= WORKED EXAMPLE ================= -->
+      <section>
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="sample-badge">Sample data — for illustration only</span>
+            <h2 style="margin-top:16px">Follow one pin&rsquo;s money</h2>
+            <p>Imagine watching a single pin the way you watch a bank account. Here is exactly how PinMaster AI follows it — step by step. Every number below is sample data.</p>
+          </div>
+          <div class="example-box">
+            <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center">
+              <div><strong style="font-family:var(--font-head)">Pin: &ldquo;7-Day Keto Meal Plan for Beginners&rdquo;</strong><div style="color:var(--ink-faint);font-size:14px;font-weight:600">ClickBank · Published via official CSV &middot; <span class="sample-badge">Sample data</span></div></div>
+              <div style="font-size:14px;font-weight:700;color:var(--ink-soft)">Tracking tag: pin_0312</div>
+            </div>
+            <div class="example-steps">
+              <div class="ex-step"><div class="n">Step 1 — A sale arrives</div><h4>Someone buys through your pin</h4><p>A visitor clicks the pin, lands on the offer, and buys. ClickBank records a sale of <strong>$47.00</strong> gross.</p><div class="amt pos">+$32.80 <span style="font-size:13px;color:var(--ink-faint);font-weight:700">commission · SAMPLE</span></div></div>
+              <div class="ex-step"><div class="n">Step 2 — Postback matches the pin</div><h4>The sale lands on the right pin</h4><p>ClickBank sends a postback with tag <strong>pin_0312</strong>. PinMaster matches it to this exact pin — not your account total, this pin.</p><div class="amt">Pin total: $32.80 <span style="font-size:13px;color:var(--ink-faint);font-weight:700">SAMPLE</span></div></div>
+              <div class="ex-step"><div class="n">Step 3 — A refund lands</div><h4>One buyer asks for a refund</h4><p>Days later, a second sale from the same pin is refunded. The network reports it, and PinMaster subtracts it automatically — you don&rsquo;t chase spreadsheets.</p><div class="amt neg">−$32.80 <span style="font-size:13px;color:var(--ink-faint);font-weight:700">refund · SAMPLE</span></div></div>
+              <div class="ex-step"><div class="n">Step 4 — Net commission shown</div><h4>What you actually keep</h4><p>After 3 sample sales and 1 sample refund, this pin&rsquo;s line reads clearly — so you know whether to clone it, refresh it, or retire it.</p><div class="amt pos">$65.60 net <span style="font-size:13px;color:var(--ink-faint);font-weight:700">2 sales kept · SAMPLE</span></div></div>
+            </div>
+            <p class="example-foot">SAMPLE DATA throughout this walkthrough. In your app, the same four steps run on your real postbacks — sales added, refunds and chargebacks subtracted, net shown per pin. Available on Pro and Agency (Revenue / per-pin commission tracking).</p>
+            <div style="text-align:center;margin-top:20px"><a class="btn btn-blue" href="#pricing">See Pro — where tracking lives</a></div>
           </div>
         </div>
       </section>
@@ -448,6 +531,12 @@
           <div class="feat-group">
             <h3>Start every day already knowing</h3>
             <div class="feat-grid">
+              <div class="feat star">
+                <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3Z"/></svg></div>
+                <h4>Growth Assistant — new in v0.14</h4>
+                <p>One click reads your own recorded numbers and builds a 30-day plan as a checklist: clone the winners, fix dead links, patch commission leaks, and prepare seasonal sets before the rush — each task with its evidence number and a button that jumps straight to the feature that does it.</p>
+                <span class="tag">Pro &amp; Agency</span>
+              </div>
               <div class="feat">
                 <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></div>
                 <h4>Your morning digest</h4>
@@ -484,6 +573,47 @@
         </div>
       </section>
 
+      <!-- ================= WHO IT'S FOR ================= -->
+      <section style="padding-bottom:0">
+        <div class="wrap">
+          <div class="sec-head">
+            <h2>Who it&rsquo;s for — picture your own workflow</h2>
+            <p>Different businesses, same quiet question at the end of the month: <em>which pins actually paid me?</em> Here is the workflow each one gets.</p>
+          </div>
+          <div class="persona-grid">
+            <div class="persona"><div class="role">Affiliate marketer</div><h3>You promote ClickBank &amp; Digistore24 offers</h3><p>Import products, generate up to 7 angles per product on Pro, publish via the official CSV, then watch each pin&rsquo;s net commission in Revenue. Clone the pin that paid — stop guessing which angle worked.</p></div>
+            <div class="persona"><div class="role">Store owner</div><h3>You sell your own products</h3><p>Turn one product listing into a week of pins without remaking images by hand. Use the review queue and seasonal calendar to stay present every day, and keep every product and pin record on your own computer.</p></div>
+            <div class="persona"><div class="role">Agency operator</div><h3>You run Pinterest for multiple accounts</h3><p>Work across accounts in the Agency workspace, keep each account&rsquo;s pins and commissions separate, and use the Morning Digest and leak scan to spot dead links and leaks before a client ever notices.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= CALCULATOR ================= -->
+      <section>
+        <div class="wrap">
+          <div class="calc-box">
+            <div>
+              <span class="kicker gold">Use your own numbers</span>
+              <h2>How many hours does pin-making by hand quietly cost you?</h2>
+              <p>Move the sliders with <strong style="color:#fff">your</strong> real routine — not ours. The estimate below is calculated only from the numbers you enter here, plus one stated assumption for PinMaster review time.</p>
+              <div style="margin-top:24px">
+                <div class="calc-field"><label for="calcPins">Pins you publish per week <output id="calcPinsOut" for="calcPins">35 pins</output></label><input type="range" id="calcPins" min="5" max="200" step="5" value="35" /></div>
+                <div class="calc-field"><label for="calcMins">Minutes per pin by hand <output id="calcMinsOut" for="calcMins">18 min</output></label><input type="range" id="calcMins" min="5" max="60" step="1" value="18" /></div>
+              </div>
+              <p class="calc-note">Assumption shown openly: with PinMaster, pins are drafted in bulk and you spend an estimated <strong style="color:#fff">2 minutes per pin</strong> reviewing and approving in the queue. If your review is faster or slower, your real saving will differ — this is an estimate from your inputs, not a promise.</p>
+            </div>
+            <div class="calc-result" aria-live="polite">
+              <div class="row"><span>By hand — per month</span><span class="big" id="calcHand">27.3 hrs</span></div>
+              <div class="row"><span>With PinMaster — per month*</span><span class="big" id="calcWith">3.0 hrs</span></div>
+              <div class="row"><span>Time you could get back</span><span class="big" style="color:var(--gold-bright)" id="calcSaved">24.3 hrs / month</span></div>
+              <div class="row"><span>That&rsquo;s roughly</span><span class="big" id="calcDays">3.0 workdays</span></div>
+              <p class="calc-note">*Estimate only, from your pins/week × your minutes/pin, using 4.33 weeks per month. PinMaster figure uses the 2-minute review assumption above. No time-saving is guaranteed — your workflow decides it.</p>
+              <a class="btn btn-orange" href="#pricing" style="width:100%;margin-top:16px">Try it free for 14 days — measure your own time</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- ================= PRICING ================= -->
       <section id="pricing">
         <div class="wrap">
@@ -509,20 +639,29 @@
           </div>
 
           <div class="toggle" id="plans">
-            <span>Monthly</span>
+            <span id="labelMonthly">Monthly</span>
             <label class="switch">
-              <input type="checkbox" id="billingToggle" aria-label="Toggle annual billing" />
+              <input type="checkbox" id="billingToggle" aria-label="Toggle annual billing" checked />
             </label>
-            <span>Annual</span>
-            <span class="save">2 months free</span>
+            <span id="labelAnnual" class="active">Annual</span>
+            <span class="save">2 months free on annual</span>
           </div>
+          <p style="text-align:center;margin:-22px 0 36px;color:var(--ink-faint);font-size:14px;font-weight:700">Annual is shown by default — prices below are <strong style="color:var(--ink)">per month, billed annually</strong>. Switch to Monthly any time to compare.</p>
 
           <div class="plans">
             <div class="plan">
               <h3>Solo</h3>
               <p class="who">For one affiliate turning a side project into a system.</p>
-              <div class="price"><span class="amt" data-monthly="$29" data-annual="$290">$29</span><span class="per" data-monthly="/month" data-annual="/year">/month</span></div>
-              <p class="bill-note" data-monthly="Billed monthly. Cancel anytime." data-annual="Billed annually — 10 × monthly, 2 months free.">Billed monthly. Cancel anytime.</p>
+              <div class="price"><span class="amt" data-monthly="$29" data-annual="$24.17">$24.17</span><span class="per" data-monthly="/month" data-annual="/month">/month</span></div>
+              <p class="bill-note" data-monthly="Billed monthly. Cancel anytime." data-annual="Per month, billed annually ($290/year — 2 months free).">Per month, billed annually ($290/year — 2 months free).</p>
+              <ul>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Up to <strong>3 Pinterest accounts</strong></li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Core pin builder — bulk pins from your product list</li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Product pins with up to <strong>3 basic angles</strong> per product</li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Official Pinterest CSV export</li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Review queue &amp; pre-publish checkup</li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>AI titles &amp; descriptions (your own key, BYOK)</li>
+              </ul>
               <a class="btn btn-ghost" href="#support">Start free 14-day trial</a>
             </div>
 
@@ -530,21 +669,56 @@
               <span class="badge">Most popular</span>
               <h3>Pro</h3>
               <p class="who">For full-time pin marketers who live on their numbers.</p>
-              <div class="price"><span class="amt" data-monthly="$59" data-annual="$590">$59</span><span class="per" data-monthly="/month" data-annual="/year">/month</span></div>
-              <p class="bill-note" data-monthly="Billed monthly. Cancel anytime." data-annual="Billed annually — 10 × monthly, 2 months free.">Billed monthly. Cancel anytime.</p>
+              <div class="price"><span class="amt" data-monthly="$59" data-annual="$49.17">$49.17</span><span class="per" data-monthly="/month" data-annual="/month">/month</span></div>
+              <p class="bill-note" data-monthly="Billed monthly. Cancel anytime." data-annual="Per month, billed annually ($590/year — 2 months free).">Per month, billed annually ($590/year — 2 months free).</p>
               <p class="founding-note">Founding members: <strong>$39/mo</strong> instead of <s>$59/mo</s>, locked for 24 months — first 100 customers only.</p>
+              <ul>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><strong>Everything in Solo, plus:</strong></li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><strong>Per-pin commission tracking (Revenue)</strong> — ClickBank + Digistore24</li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><strong>Growth Assistant</strong> — 30-day plan from your own numbers (v0.14)</li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Morning Digest + refresh cycle + seasonal calendar</li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Up to <strong>7 angles per product</strong></li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Winner cloning + commission leak scan</li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Dead link checker</li>
+              </ul>
               <a class="btn btn-orange" href="#support">Start free 14-day trial</a>
             </div>
 
             <div class="plan">
               <h3>Agency</h3>
               <p class="who">For operators running Pinterest affiliate at team scale.</p>
-              <div class="price"><span class="amt" data-monthly="$119" data-annual="$1,190">$119</span><span class="per" data-monthly="/month" data-annual="/year">/month</span></div>
-              <p class="bill-note" data-monthly="Billed monthly. Cancel anytime." data-annual="Billed annually — 10 × monthly, 2 months free.">Billed monthly. Cancel anytime.</p>
+              <div class="price"><span class="amt" data-monthly="$119" data-annual="$99.17">$99.17</span><span class="per" data-monthly="/month" data-annual="/month">/month</span></div>
+              <p class="bill-note" data-monthly="Billed monthly. Cancel anytime." data-annual="Per month, billed annually ($1,190/year — 2 months free).">Per month, billed annually ($1,190/year — 2 months free).</p>
+              <ul>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><strong>Everything in Pro, plus:</strong></li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><strong>Multi-account agency workspace</strong></li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Run multiple Pinterest accounts side by side, each with its own pins &amp; commissions</li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>All Pro growth tools across every account in the workspace</li>
+              </ul>
               <a class="btn btn-ghost" href="#support">Start free 14-day trial</a>
             </div>
           </div>
-          <p class="trial-note">All prices in USD. Every plan: 14-day free trial, no card required.</p>
+          <p class="trial-note">All prices in USD. Every plan: 14-day free trial, no card required. Annual prices above are per month, billed annually.</p>
+
+          <div class="compare-wrap" role="region" aria-label="Plan comparison">
+            <table class="compare">
+              <thead><tr><th>Feature</th><th class="c">Solo</th><th class="c">Pro</th><th class="c">Agency</th></tr></thead>
+              <tbody>
+                <tr><td>Pinterest accounts</td><td class="c">Up to 3</td><td class="c">Up to 3</td><td class="c">Multi-account workspace</td></tr>
+                <tr><td>Core pin builder + official CSV export</td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="yes">✓</span></td></tr>
+                <tr><td>Angles per product</td><td class="c">Up to 3 basic</td><td class="c">Up to 7</td><td class="c">Up to 7</td></tr>
+                <tr><td>Review queue &amp; pre-publish checkup</td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="yes">✓</span></td></tr>
+                <tr><td>Per-pin commission tracking (Revenue)</td><td class="c"><span class="no">—</span></td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="yes">✓</span></td></tr>
+                <tr><td>Growth Assistant (30-day plan)</td><td class="c"><span class="no">—</span></td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="yes">✓</span></td></tr>
+                <tr><td>Morning Digest</td><td class="c"><span class="no">—</span></td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="yes">✓</span></td></tr>
+                <tr><td>Refresh cycle + seasonal calendar</td><td class="c"><span class="no">—</span></td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="yes">✓</span></td></tr>
+                <tr><td>Winner cloning</td><td class="c"><span class="no">—</span></td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="yes">✓</span></td></tr>
+                <tr><td>Commission leak scan + dead link checker</td><td class="c"><span class="no">—</span></td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="yes">✓</span></td></tr>
+                <tr><td>Multi-account agency workspace</td><td class="c"><span class="no">—</span></td><td class="c"><span class="no">—</span></td><td class="c"><span class="yes">✓</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="text-align:center;margin-top:14px;font-size:14px;color:var(--ink-faint);font-weight:600">Still deciding? Start the free trial on Pro — you&rsquo;ll see your first per-pin report before you pay.</p>
 
           <div class="included">
             <h3>What PinMaster AI does for you</h3>
@@ -687,16 +861,55 @@
     </footer>
 
     <script>
-      // Billing toggle: swap amounts, per-labels and billing notes.
+      // Billing toggle: swap amounts, per-labels and billing notes. Annual is default.
       (function () {
         var toggle = document.getElementById('billingToggle');
         if (!toggle) return;
-        toggle.addEventListener('change', function () {
+        function apply() {
           var mode = toggle.checked ? 'annual' : 'monthly';
           document.querySelectorAll('[data-monthly]').forEach(function (el) {
             el.textContent = el.getAttribute('data-' + mode);
           });
-        });
+          var lm = document.getElementById('labelMonthly');
+          var la = document.getElementById('labelAnnual');
+          if (lm && la) {
+            lm.classList.toggle('active', mode === 'monthly');
+            la.classList.toggle('active', mode === 'annual');
+          }
+        }
+        toggle.addEventListener('change', apply);
+        apply();
+      })();
+
+      // Time-savings calculator: estimate from visitor's own numbers only.
+      (function () {
+        var pins = document.getElementById('calcPins');
+        var mins = document.getElementById('calcMins');
+        if (!pins || !mins) return;
+        var pinsOut = document.getElementById('calcPinsOut');
+        var minsOut = document.getElementById('calcMinsOut');
+        var handEl = document.getElementById('calcHand');
+        var withEl = document.getElementById('calcWith');
+        var savedEl = document.getElementById('calcSaved');
+        var daysEl = document.getElementById('calcDays');
+        var WEEKS = 4.33, REVIEW_MIN = 2;
+        function fmt(n) { return (Math.round(n * 10) / 10).toFixed(1); }
+        function update() {
+          var p = parseFloat(pins.value) || 0;
+          var m = parseFloat(mins.value) || 0;
+          pinsOut.textContent = p + ' pins';
+          minsOut.textContent = m + ' min';
+          var hand = p * m * WEEKS / 60;
+          var withPm = p * REVIEW_MIN * WEEKS / 60;
+          var saved = Math.max(0, hand - withPm);
+          handEl.textContent = fmt(hand) + ' hrs';
+          withEl.textContent = fmt(withPm) + ' hrs';
+          savedEl.textContent = fmt(saved) + ' hrs / month';
+          daysEl.textContent = fmt(saved / 8) + ' workdays';
+        }
+        pins.addEventListener('input', update);
+        mins.addEventListener('input', update);
+        update();
       })();
 
       // FAQ accordion: one open at a time.

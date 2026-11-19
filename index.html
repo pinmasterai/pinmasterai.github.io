@@ -152,19 +152,19 @@
       .step h3{font-size:17.5px;font-weight:700;margin-bottom:9px}
       .step p{color:var(--ink-soft);font-size:15px}
 
-      /* ---------- founding banner ---------- */
-      .founding{background:linear-gradient(120deg,#12283f 0%,var(--bg-deep) 60%);border-radius:20px;padding:44px 40px;color:#fff;display:grid;grid-template-columns:1.4fr .8fr;gap:36px;align-items:center}
-      @media(max-width:820px){.founding{grid-template-columns:1fr;padding:34px 26px}}
-      .founding h2{font-size:clamp(25px,3.4vw,34px);font-weight:800;margin-bottom:14px}
-      .founding h2 .gold{color:var(--gold-bright)}
-      .founding p{color:#c3d5ea;font-size:16.5px;max-width:520px}
-      .founding-price{background:rgba(255,255,255,.06);border:1px solid rgba(245,179,1,.45);border-radius:16px;padding:26px;text-align:center}
-      .founding-price .was{color:#9db4cc;font-size:17px;font-weight:700}
-      .founding-price .was s{text-decoration-color:var(--gold-bright);text-decoration-thickness:2px}
-      .founding-price .now{font-family:var(--font-head);font-size:52px;font-weight:800;color:#fff;line-height:1.05}
-      .founding-price .now small{font-size:18px;color:#c3d5ea;font-weight:700}
-      .founding-price .lock{color:var(--gold-bright);font-weight:800;font-size:14.5px;margin:8px 0 18px}
-      .founding-price .spots{margin-top:14px;font-size:13.5px;color:#9db4cc;font-weight:600}
+      /* ---------- appreciation banner ---------- */
+      .appreciation{background:linear-gradient(120deg,#12283f 0%,var(--bg-deep) 60%);border-radius:20px;padding:44px 40px;color:#fff;display:grid;grid-template-columns:1.4fr .8fr;gap:36px;align-items:center}
+      @media(max-width:820px){.appreciation{grid-template-columns:1fr;padding:34px 26px}}
+      .appreciation h2{font-size:clamp(25px,3.4vw,34px);font-weight:800;margin-bottom:14px}
+      .appreciation h2 .gold{color:var(--gold-bright)}
+      .appreciation p{color:#c3d5ea;font-size:16.5px;max-width:520px}
+      .appreciation-price{background:rgba(255,255,255,.06);border:1px solid rgba(245,179,1,.45);border-radius:16px;padding:26px;text-align:center}
+      .appreciation-price .was{color:#9db4cc;font-size:17px;font-weight:700}
+      .appreciation-price .was s{text-decoration-color:var(--gold-bright);text-decoration-thickness:2px}
+      .appreciation-price .now{font-family:var(--font-head);font-size:52px;font-weight:800;color:#fff;line-height:1.05}
+      .appreciation-price .now small{font-size:18px;color:#c3d5ea;font-weight:700}
+      .appreciation-price .lock{color:var(--gold-bright);font-weight:800;font-size:14.5px;margin:8px 0 18px}
+      .appreciation-price .period{margin-top:14px;font-size:13.5px;color:#9db4cc;font-weight:600}
 
       /* ---------- pricing ---------- */
       .toggle{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:40px;font-weight:700}
@@ -186,8 +186,8 @@
       .price .amt{font-family:var(--font-head);font-size:48px;font-weight:800;line-height:1}
       .price .per{color:var(--ink-faint);font-weight:700;font-size:16px}
       .bill-note{font-size:13.5px;color:var(--ink-faint);font-weight:600;margin:8px 0 4px;min-height:20px}
-      .founding-note{margin:10px 0 0;background:var(--gold-bg);border:1px solid var(--gold-line);border-radius:10px;padding:10px 14px;font-size:14px;font-weight:700;color:#6d4c02}
-      .founding-note s{color:var(--ink-faint)}
+      .appreciation-note{margin:10px 0 0;background:var(--gold-bg);border:1px solid var(--gold-line);border-radius:10px;padding:10px 14px;font-size:14px;font-weight:700;color:#6d4c02}
+      .appreciation-note s{color:var(--ink-faint)}
       .plan ul{list-style:none;margin:22px 0 26px;padding:0;display:grid;gap:11px}
       .plan li{display:flex;gap:10px;font-size:15px;color:var(--ink-soft);align-items:flex-start}
       .plan li svg{flex:none;margin-top:3px;color:var(--blue)}
@@ -623,18 +623,18 @@
             <p>Every plan starts with a free 14-day trial — no card required. You&rsquo;ll know exactly what your pins earn long before you pay a cent.</p>
           </div>
 
-          <div class="founding" style="margin-bottom:56px">
+          <div class="appreciation" style="margin-bottom:56px">
             <div>
-              <span class="kicker gold">Founding offer</span>
-              <h2>The first 100 customers lock Pro at <span class="gold">$39/month — for 24 months</span></h2>
-              <p>When the founding spots are gone, Pro goes back to $59/month and stays there. Founding members keep $39 locked for a full two years, renewals included.</p>
+              <span class="kicker gold">Customer appreciation</span>
+              <h2>Customer appreciation: Pro for <span class="gold">$39/month, locked for 24 months</span></h2>
+              <p>To say thank you at launch, we&rsquo;re running a customer appreciation period: while it runs, Pro is $39/month instead of the $59 list price — and everyone who joins during the appreciation period keeps $39 locked for a full 24 months, renewals included. When the appreciation period ends, Pro returns to $59/month.</p>
             </div>
-            <div class="founding-price">
+            <div class="appreciation-price">
               <div class="was">Pro list price <s>$59/mo</s></div>
               <div class="now">$39<small>/mo</small></div>
               <div class="lock">Price locked for 24 months</div>
-              <a class="btn btn-orange" href="#plans" style="width:100%">Claim a founding spot</a>
-              <div class="spots">100 founding spots total · first come, first served</div>
+              <a class="btn btn-orange" href="#plans" style="width:100%">Get Pro at the appreciation price</a>
+              <div class="period">Appreciation pricing — during the appreciation period only.</div>
             </div>
           </div>
 
@@ -671,7 +671,7 @@
               <p class="who">For full-time pin marketers who live on their numbers.</p>
               <div class="price"><span class="amt" data-monthly="$59" data-annual="$49.17">$49.17</span><span class="per" data-monthly="/month" data-annual="/month">/month</span></div>
               <p class="bill-note" data-monthly="Billed monthly. Cancel anytime." data-annual="Per month, billed annually ($590/year — 2 months free).">Per month, billed annually ($590/year — 2 months free).</p>
-              <p class="founding-note">Founding members: <strong>$39/mo</strong> instead of <s>$59/mo</s>, locked for 24 months — first 100 customers only.</p>
+              <p class="appreciation-note">Appreciation price: <strong>$39/mo</strong> instead of <s>$59/mo</s>, locked for 24 months — for everyone who joins during the customer appreciation period.</p>
               <ul>
                 <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><strong>Everything in Solo, plus:</strong></li>
                 <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><strong>Per-pin commission tracking (Revenue)</strong> — ClickBank + Digistore24</li>
@@ -763,6 +763,24 @@
           </div>
         </div>
       </section>
+
+      <!--
+        REVIEWS SECTION — DO NOT ENABLE until real customer reviews exist. Populate ONLY with real customers' actual words, names and results. Never fabricate testimonials, quotes, star ratings or user counts.
+
+        Empty scaffold for future real customer reviews (do not render until populated with real reviews):
+        <section id="reviews">
+          <div class="wrap">
+            <div class="sec-head">
+              <h2>What customers say</h2>
+            </div>
+            <div>
+              <blockquote></blockquote>
+              <blockquote></blockquote>
+              <blockquote></blockquote>
+            </div>
+          </div>
+        </section>
+      -->
 
       <!-- ================= FAQ ================= -->
       <section id="faq">

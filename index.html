@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light" />
+    <meta name="description" content="PinMaster AI is the Windows desktop app for Pinterest affiliates: build pins in bulk, publish with Pinterest's official CSV upload, and — for the first time — track the exact commission of every single pin." />
+    <link rel="icon" href="data:," />
+    <title>PinMaster AI — Know Exactly Which Pins Pay You</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root{
+        --bg:#ffffff;
+        --bg-alt:#f0f6fe;
+        --bg-deep:#0a2540;
+        --ink:#0b1b33;
+        --ink-soft:#3d5470;
+        --ink-faint:#5b7290;
+        --line:#dbe7f5;
+        --blue:#0a5cff;
+        --blue-dark:#0847c4;
+        --blue-soft:#e3eeff;
+        --orange:#f25c05;
+        --orange-dark:#d94e00;
+        --gold:#b97e04;
+        --gold-bright:#f5b301;
+        --gold-bg:#fff7e0;
+        --gold-line:#f0d48a;
+        --green:#0e8a4d;
+        --green-bg:#e6f6ec;
+        --red:#c62f3b;
+        --red-bg:#fdecec;
+        --radius:14px;
+        --shadow:0 18px 45px -18px rgba(10,37,64,.25);
+        --font-head:"Plus Jakarta Sans",system-ui,sans-serif;
+        --font-body:"Manrope",system-ui,sans-serif;
+      }
+      *{box-sizing:border-box}
+      html{scroll-behavior:smooth}
+      body{margin:0;font-family:var(--font-body);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+      h1,h2,h3{font-family:var(--font-head);line-height:1.15;margin:0;letter-spacing:-.01em}
+      p{margin:0}
+      a{color:var(--blue)}
+      .wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+      section{padding:84px 0}
+      .alt{background:var(--bg-alt)}
+      .sec-head{max-width:720px;margin:0 auto 48px;text-align:center}
+      .sec-head.left{margin-left:0;text-align:left}
+      .sec-head h2{font-size:clamp(28px,4vw,40px);font-weight:800;margin-bottom:14px}
+      .sec-head p{color:var(--ink-soft);font-size:17px}
+      .kicker{display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);background:var(--blue-soft);padding:6px 14px;border-radius:999px;margin-bottom:18px}
+      .kicker.gold{color:var(--gold);background:var(--gold-bg)}
+
+      /* ---------- buttons ---------- */
+      .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-body);font-weight:800;font-size:16px;text-decoration:none;border-radius:10px;padding:14px 26px;min-height:52px;border:2px solid transparent;cursor:pointer;transition:background .15s ease,transform .15s ease}
+      .btn-orange{background:var(--orange);color:#fff}
+      .btn-orange:hover{background:var(--orange-dark)}
+      .btn-ghost{background:#fff;color:var(--ink);border-color:var(--line)}
+      .btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+      .btn-blue{background:var(--blue);color:#fff}
+      .btn-blue:hover{background:var(--blue-dark)}
+      .btn-sm{padding:10px 18px;min-height:44px;font-size:15px}
+
+      /* ---------- nav ---------- */
+      header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+      .nav{display:flex;align-items:center;gap:28px;height:64px}
+      .nav-links{display:flex;gap:26px;margin-left:auto}
+      .nav-links a{color:var(--ink-soft);text-decoration:none;font-weight:700;font-size:15px;padding:10px 2px}
+      .nav-links a:hover{color:var(--blue)}
+      .nav .btn{margin-left:6px}
+      @media(max-width:760px){.nav-links{display:none}.nav .btn{margin-left:auto}}
+
+      /* ---------- hero ---------- */
+      .hero{padding:72px 0 84px;background:linear-gradient(180deg,#eaf3ff 0%,#ffffff 88%)}
+      .hero-grid{display:grid;grid-template-columns:1.02fr 1fr;gap:52px;align-items:center}
+      @media(max-width:920px){.hero-grid{grid-template-columns:1fr}}
+      .hero h1{font-size:clamp(34px,5vw,52px);font-weight:800;margin-bottom:20px}
+      .hero h1 .hl{color:var(--blue)}
+      .hero .sub{font-size:18.5px;color:var(--ink-soft);margin-bottom:28px;max-width:540px}
+      .hero .sub strong{color:var(--ink)}
+      .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+      .hero-note{font-size:14.5px;color:var(--ink-faint);font-weight:600;display:flex;flex-wrap:wrap;gap:6px 18px}
+      .hero-note span{display:inline-flex;align-items:center;gap:6px}
+      .hero-note svg{flex:none}
+
+      /* app window mock */
+      .appwin{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+      .appwin-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);background:#f7fafd}
+      .dot{width:11px;height:11px;border-radius:50%}
+      .appwin-title{margin-left:8px;font-size:13.5px;font-weight:700;color:var(--ink-soft)}
+      .appwin-body{padding:18px}
+      .appwin-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+      .stat{background:var(--bg-alt);border-radius:10px;padding:10px 12px}
+      .stat .lbl{font-size:11.5px;font-weight:700;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.06em}
+      .stat .val{font-family:var(--font-head);font-size:19px;font-weight:800}
+      .stat .val.green{color:var(--green)}
+      table.pins{width:100%;border-collapse:collapse;font-size:13.5px}
+      table.pins th{text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint);padding:6px 8px;border-bottom:1px solid var(--line)}
+      table.pins td{padding:9px 8px;border-bottom:1px solid #eef3fa;font-weight:600;vertical-align:middle}
+      table.pins tr:last-child td{border-bottom:none}
+      td.net{font-family:var(--font-head);font-weight:800}
+      td.net.pos{color:var(--green)}
+      td.net.zero{color:var(--ink-faint)}
+      .chip{display:inline-block;font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;white-space:nowrap}
+      .chip.win{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-line)}
+      .chip.ok{background:var(--green-bg);color:var(--green)}
+      .chip.dead{background:var(--red-bg);color:var(--red)}
+      .appwin-foot{padding:12px 18px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-faint);font-weight:600;background:#fbfdff}
+      @media(max-width:520px){.appwin-stats{grid-template-columns:1fr 1fr 1fr}.stat .val{font-size:16px}table.pins th:nth-child(3),table.pins td:nth-child(3){display:none}}
+
+      /* ---------- pains ---------- */
+      .pain-list{max-width:820px;margin:0 auto;display:grid;gap:14px}
+      .pain{display:flex;gap:16px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;align-items:flex-start}
+      .pain .x{flex:none;width:34px;height:34px;border-radius:50%;background:var(--red-bg);color:var(--red);display:flex;align-items:center;justify-content:center;margin-top:2px}
+      .pain p{font-size:16.5px;color:var(--ink-soft)}
+      .pain p strong{color:var(--ink)}
+      .turn{max-width:820px;margin:34px auto 0;text-align:center;font-size:18px;color:var(--ink-soft)}
+      .turn strong{color:var(--blue)}
+
+      /* ---------- differentiator ---------- */
+      .diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+      @media(max-width:880px){.diff-grid{grid-template-columns:1fr}}
+      .diff-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px 26px}
+      .diff-card .ic{width:46px;height:46px;border-radius:12px;background:var(--blue-soft);color:var(--blue);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+      .diff-card h3{font-size:19px;font-weight:700;margin-bottom:10px}
+      .diff-card p{color:var(--ink-soft);font-size:15.5px}
+
+      /* ---------- features ---------- */
+      .feat-group{margin-bottom:44px}
+      .feat-group:last-child{margin-bottom:0}
+      .feat-group>h3{font-size:15px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:18px;display:flex;align-items:center;gap:12px}
+      .feat-group>h3::after{content:"";flex:1;height:1px;background:var(--line)}
+      .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+      @media(max-width:920px){.feat-grid{grid-template-columns:repeat(2,1fr)}}
+      @media(max-width:600px){.feat-grid{grid-template-columns:1fr}}
+      .feat{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px}
+      .feat.star{border-color:var(--gold-line);background:linear-gradient(180deg,var(--gold-bg),#fff 70%)}
+      .feat .ic{width:42px;height:42px;border-radius:11px;background:var(--blue-soft);color:var(--blue);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+      .feat.star .ic{background:#fbeec3;color:var(--gold)}
+      .feat h4{font-family:var(--font-head);font-size:16.5px;font-weight:700;margin:0 0 8px}
+      .feat p{color:var(--ink-soft);font-size:15px}
+      .feat .tag{display:inline-block;margin-top:12px;font-size:11.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--gold);background:var(--gold-bg);border:1px solid var(--gold-line);padding:3px 10px;border-radius:999px}
+
+      /* ---------- steps ---------- */
+      .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:step}
+      @media(max-width:920px){.steps{grid-template-columns:repeat(2,1fr)}}
+      @media(max-width:560px){.steps{grid-template-columns:1fr}}
+      .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;position:relative}
+      .step .num{font-family:var(--font-head);font-size:15px;font-weight:800;color:#fff;background:var(--blue);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+      .step h3{font-size:17.5px;font-weight:700;margin-bottom:9px}
+      .step p{color:var(--ink-soft);font-size:15px}
+
+      /* ---------- founding banner ---------- */
+      .founding{background:linear-gradient(120deg,#12283f 0%,var(--bg-deep) 60%);border-radius:20px;padding:44px 40px;color:#fff;display:grid;grid-template-columns:1.4fr .8fr;gap:36px;align-items:center}
+      @media(max-width:820px){.founding{grid-template-columns:1fr;padding:34px 26px}}
+      .founding h2{font-size:clamp(25px,3.4vw,34px);font-weight:800;margin-bottom:14px}
+      .founding h2 .gold{color:var(--gold-bright)}
+      .founding p{color:#c3d5ea;font-size:16.5px;max-width:520px}
+      .founding-price{background:rgba(255,255,255,.06);border:1px solid rgba(245,179,1,.45);border-radius:16px;padding:26px;text-align:center}
+      .founding-price .was{color:#9db4cc;font-size:17px;font-weight:700}
+      .founding-price .was s{text-decoration-color:var(--gold-bright);text-decoration-thickness:2px}
+      .founding-price .now{font-family:var(--font-head);font-size:52px;font-weight:800;color:#fff;line-height:1.05}
+      .founding-price .now small{font-size:18px;color:#c3d5ea;font-weight:700}
+      .founding-price .lock{color:var(--gold-bright);font-weight:800;font-size:14.5px;margin:8px 0 18px}
+      .founding-price .spots{margin-top:14px;font-size:13.5px;color:#9db4cc;font-weight:600}
+
+      /* ---------- pricing ---------- */
+      .toggle{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:40px;font-weight:700}
+      .toggle .save{color:var(--green);background:var(--green-bg);font-size:12.5px;font-weight:800;padding:3px 10px;border-radius:999px}
+      .switch{position:relative;width:58px;height:32px;flex:none;display:inline-block}
+      .switch input{appearance:none;-webkit-appearance:none;width:58px;height:32px;margin:0;border:none;border-radius:999px;background:#c9d9ec;cursor:pointer;position:relative;transition:background .15s;display:block}
+      .switch input::after{content:"";position:absolute;top:4px;left:4px;width:24px;height:24px;border-radius:50%;background:#fff;transition:left .15s;box-shadow:0 1px 4px rgba(10,37,64,.3)}
+      .switch input:checked{background:var(--blue)}
+      .switch input:checked::after{left:30px}
+      .switch input:focus-visible{outline:3px solid var(--blue-soft);outline-offset:2px}
+      .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+      @media(max-width:920px){.plans{grid-template-columns:1fr;max-width:480px;margin:0 auto}}
+      .plan{background:#fff;border:1px solid var(--line);border-radius:18px;padding:32px 28px;display:flex;flex-direction:column;position:relative}
+      .plan.pro{border:2px solid var(--gold-bright);box-shadow:0 20px 45px -20px rgba(185,126,4,.45)}
+      .plan .badge{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:var(--gold-bright);color:#3d2a00;font-size:12.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:6px 16px;border-radius:999px;white-space:nowrap}
+      .plan h3{font-size:21px;font-weight:800}
+      .plan .who{color:var(--ink-faint);font-size:14.5px;font-weight:600;margin:6px 0 22px;min-height:44px}
+      .price{display:flex;align-items:baseline;gap:6px}
+      .price .amt{font-family:var(--font-head);font-size:48px;font-weight:800;line-height:1}
+      .price .per{color:var(--ink-faint);font-weight:700;font-size:16px}
+      .bill-note{font-size:13.5px;color:var(--ink-faint);font-weight:600;margin:8px 0 4px;min-height:20px}
+      .founding-note{margin:10px 0 0;background:var(--gold-bg);border:1px solid var(--gold-line);border-radius:10px;padding:10px 14px;font-size:14px;font-weight:700;color:#6d4c02}
+      .founding-note s{color:var(--ink-faint)}
+      .plan ul{list-style:none;margin:22px 0 26px;padding:0;display:grid;gap:11px}
+      .plan li{display:flex;gap:10px;font-size:15px;color:var(--ink-soft);align-items:flex-start}
+      .plan li svg{flex:none;margin-top:3px;color:var(--blue)}
+      .plan .btn{margin-top:auto;width:100%}
+      .trial-note{text-align:center;margin-top:14px;font-size:14px;color:var(--ink-faint);font-weight:600}
+      .included{margin-top:44px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px 30px}
+      .included h3{font-size:18px;font-weight:800;margin-bottom:16px;text-align:center}
+      .included ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px 26px}
+      @media(max-width:820px){.included ul{grid-template-columns:1fr}}
+      .included li{display:flex;gap:10px;font-size:15px;color:var(--ink-soft);align-items:flex-start}
+      .included li svg{flex:none;margin-top:3px;color:var(--green)}
+
+      /* ---------- guarantee ---------- */
+      .guarantee{border:2px solid var(--blue);border-radius:20px;padding:40px;display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;background:#fff}
+      @media(max-width:820px){.guarantee{grid-template-columns:1fr;padding:30px 24px}}
+      .guarantee .seal{width:76px;height:76px;border-radius:50%;background:var(--blue-soft);color:var(--blue);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+      .guarantee h2{font-size:clamp(25px,3.4vw,32px);font-weight:800;margin-bottom:12px}
+      .guarantee .lead{color:var(--ink-soft);font-size:16.5px}
+      .g-cols{display:grid;gap:26px}
+      .g-cols h3{font-size:16px;font-weight:800;margin-bottom:12px}
+      .g-cols ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+      .g-cols li{display:flex;gap:10px;font-size:15.5px;color:var(--ink-soft);align-items:flex-start}
+      .g-cols li svg{flex:none;margin-top:3px}
+      .g-cols .yes svg{color:var(--green)}
+      .g-cols .no svg{color:var(--red)}
+      .g-cols li strong{color:var(--ink)}
+
+      /* ---------- faq ---------- */
+      .faq-list{max-width:820px;margin:0 auto;display:grid;gap:12px}
+      .faq{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+      .faq button{width:100%;background:none;border:none;font-family:var(--font-body);font-size:16.5px;font-weight:700;color:var(--ink);text-align:left;padding:20px 22px;min-height:56px;display:flex;justify-content:space-between;align-items:center;gap:16px;cursor:pointer}
+      .faq button .chev{flex:none;color:var(--blue);transition:transform .2s}
+      .faq.open button .chev{transform:rotate(180deg)}
+      .faq .answer{display:none;padding:0 22px 22px;color:var(--ink-soft);font-size:15.5px}
+      .faq.open .answer{display:block}
+
+      /* ---------- support ---------- */
+      .support-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:860px;margin:0 auto}
+      @media(max-width:700px){.support-grid{grid-template-columns:1fr}}
+      .support-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:30px 28px;text-align:center}
+      .support-card .ic{width:52px;height:52px;border-radius:50%;background:var(--blue-soft);color:var(--blue);display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+      .support-card h3{font-size:19px;font-weight:800;margin-bottom:8px}
+      .support-card p{color:var(--ink-soft);font-size:15.5px;margin-bottom:16px}
+      .support-card .addr{font-weight:800;font-size:16.5px;color:var(--blue);text-decoration:none;word-break:break-all}
+      .support-card .addr:hover{text-decoration:underline}
+
+      /* ---------- final cta ---------- */
+      .final{background:var(--bg-deep);color:#fff;text-align:center}
+      .final h2{font-size:clamp(28px,4.4vw,44px);font-weight:800;max-width:760px;margin:0 auto 18px}
+      .final h2 .hl{color:var(--gold-bright)}
+      .final p{color:#c3d5ea;font-size:17.5px;max-width:600px;margin:0 auto 30px}
+      .final .note{margin-top:18px;font-size:14.5px;color:#8fa9c4;font-weight:600}
+
+      footer{padding:40px 0;border-top:1px solid var(--line);background:#fbfdff}
+      .foot{display:flex;flex-wrap:wrap;gap:14px 34px;align-items:center;justify-content:space-between}
+      .foot nav{display:flex;flex-wrap:wrap;gap:6px 22px}
+      .foot nav a{color:var(--ink-soft);text-decoration:none;font-weight:700;font-size:14.5px;padding:8px 2px}
+      .foot nav a:hover{color:var(--blue)}
+      .legal{margin-top:22px;font-size:13px;color:var(--ink-faint);max-width:820px}
+      @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+    </style>
+  </head>
+  <body>
+
+    <header>
+      <div class="wrap nav">
+        <nav class="nav-links" aria-label="Main">
+          <a href="#features">Features</a>
+          <a href="#how">How it works</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#guarantee">Guarantee</a>
+          <a href="#faq">FAQ</a>
+          <a href="#support">Support</a>
+        </nav>
+        <a class="btn btn-orange btn-sm" href="#pricing">Start free 14-day trial</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- ================= HERO ================= -->
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div>
+            <span class="kicker">New · Per-pin commission tracking</span>
+            <h1>Discover exactly which of your pins <span class="hl">make you money</span> — and which ones quietly don&rsquo;t.</h1>
+            <p class="sub">You post pin after pin and hope. PinMaster AI ends the guessing: it builds your pins in bulk, then tracks the <strong>exact commission of every single pin</strong> through ClickBank and Digistore24 postbacks — sales added, refunds taken back out. No other Pinterest tool shows you this number.</p>
+            <div class="hero-ctas">
+              <a class="btn btn-orange" href="#pricing">Start free 14-day trial</a>
+              <a href="#how" style="font-weight:800;font-size:15.5px;color:var(--blue);text-decoration:none;display:inline-flex;align-items:center;min-height:52px;padding:0 6px">See how it works ↓</a>
+            </div>
+            <div class="hero-note">
+              <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0e8a4d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No card required</span>
+              <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0e8a4d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Windows desktop app</span>
+              <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0e8a4d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No Pinterest API approval needed</span>
+            </div>
+          </div>
+          <div class="appwin" role="img" aria-label="Preview of the PinMaster AI commission tracker: a list of pins with the net commission each one earned">
+            <div class="appwin-bar">
+              <span class="dot" style="background:#f26d6d"></span>
+              <span class="dot" style="background:#f5b301"></span>
+              <span class="dot" style="background:#3ecf6f"></span>
+              <span class="appwin-title">PinMaster AI — Commission Tracker</span>
+            </div>
+            <div class="appwin-body">
+              <div class="appwin-stats">
+                <div class="stat"><div class="lbl">Net commissions</div><div class="val green">$1,284.60</div></div>
+                <div class="stat"><div class="lbl">Pins tracked</div><div class="val">312</div></div>
+                <div class="stat"><div class="lbl">Dead links found</div><div class="val" style="color:var(--red)">3</div></div>
+              </div>
+              <table class="pins">
+                <thead><tr><th>Pin</th><th>Network</th><th>Sales</th><th>Net</th><th></th></tr></thead>
+                <tbody>
+                  <tr><td>7-Day Keto Meal Plan for Beginners</td><td>ClickBank</td><td>41</td><td class="net pos">$612.30</td><td><span class="chip win">Winner</span></td></tr>
+                  <tr><td>Small Kitchen Storage Ideas That Work</td><td>Digistore24</td><td>18</td><td class="net pos">$243.90</td><td><span class="chip ok">Earning</span></td></tr>
+                  <tr><td>Morning Yoga Routine — 15 Minutes</td><td>ClickBank</td><td>9</td><td class="net pos">$118.40</td><td><span class="chip ok">Earning</span></td></tr>
+                  <tr><td>Budget Home Office Setup Guide</td><td>Digistore24</td><td>0</td><td class="net zero">$0.00</td><td><span class="chip dead">Dead link</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="appwin-foot"><strong style="color:var(--ink-soft)">Sample data, shown for illustration.</strong> In your app, these are your real numbers: refunds and chargebacks are subtracted automatically, so what you see is the money you actually keep.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PAINS ================= -->
+      <section>
+        <div class="wrap">
+          <div class="sec-head">
+            <h2>Be honest — does this sound like your Pinterest business?</h2>
+            <p>Most affiliates work hard. Almost none of them can answer one simple question: <em>which pin paid for last month?</em></p>
+          </div>
+          <div class="pain-list">
+            <div class="pain"><span class="x"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span><p>You publish <strong>dozens of pins a week</strong> — and still can&rsquo;t say which ones earned your last payout.</p></div>
+            <div class="pain"><span class="x"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span><p>Your affiliate dashboard shows <strong>account totals, not pins</strong> — so you keep scaling content that never converts.</p></div>
+            <div class="pain"><span class="x"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span><p>A product link died three weeks ago. The pin still gets clicks. <strong>Every one of those commissions goes nowhere.</strong></p></div>
+            <div class="pain"><span class="x"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span><p>Refunds and chargebacks quietly eat money you thought you&rsquo;d already earned — and <strong>you find out weeks later</strong>, if ever.</p></div>
+            <div class="pain"><span class="x"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span><p>You remake the same pin angles by hand because <strong>last month&rsquo;s winners are buried</strong> in spreadsheets and screenshots.</p></div>
+          </div>
+          <p class="turn">None of that is a work-ethic problem. It&rsquo;s a <strong>visibility problem</strong> — and it has a very specific fix.</p>
+        </div>
+      </section>
+
+      <!-- ================= DIFFERENTIATOR ================= -->
+      <section class="alt">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="kicker gold">The difference</span>
+            <h2>Finally, the one number nobody else shows you</h2>
+            <p>Other tools count clicks and impressions. PinMaster AI follows the money — all the way down to the individual pin that earned it.</p>
+          </div>
+          <div class="diff-grid">
+            <div class="diff-card">
+              <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></div>
+              <h3>Every pin, its own profit line</h3>
+              <p>ClickBank and Digistore24 send a postback for every sale, tagged to the exact pin that produced it. You open one screen and see precisely what each pin is worth — no spreadsheets, no guessing.</p>
+            </div>
+            <div class="diff-card">
+              <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></div>
+              <h3>Refunds come back out — automatically</h3>
+              <p>A sale that gets refunded or charged back is subtracted from that pin&rsquo;s total the moment the network reports it. The number you see is the money you actually keep, never the inflated version.</p>
+            </div>
+            <div class="diff-card">
+              <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div>
+              <h3>So you clone winners, not maybes</h3>
+              <p>Once you know your top pins by real earnings, you duplicate what works and stop feeding what doesn&rsquo;t. Your next month of content is built on proof, not hunches.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= FEATURES ================= -->
+      <section id="features">
+        <div class="wrap">
+          <div class="sec-head">
+            <h2>Everything you need to run Pinterest like a business</h2>
+            <p>From a raw product list to a pin whose profit you can prove — here is what PinMaster AI actually does for you, every working day.</p>
+          </div>
+
+          <div class="feat-group">
+            <h3>Create pins at scale</h3>
+            <div class="feat-grid">
+              <div class="feat">
+                <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+                <h4>Bulk pin builder</h4>
+                <p>Drop in a CSV or your product list and watch publish-ready pins appear in minutes — instead of an afternoon of copy-pasting, one pin at a time.</p>
+              </div>
+              <div class="feat">
+                <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+                <h4>One product → a week of pins</h4>
+                <p>A single product becomes up to 7 pins, each with a different content angle. You fill a week of posting from one item — and every angle gets its own shot at going viral.</p>
+              </div>
+              <div class="feat">
+                <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3Z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"/></svg></div>
+                <h4>AI titles &amp; descriptions — your key, your control</h4>
+                <p>Connect your own AI key (BYOK) and PinMaster writes scroll-stopping titles and descriptions for every pin. You pay your provider directly, at cost — no marked-up credits, ever.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="feat-group">
+            <h3>Publish the official way</h3>
+            <div class="feat-grid">
+              <div class="feat">
+                <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+                <h4>Review queue &amp; golden-hour scheduling</h4>
+                <p>Nothing goes out without your approval. Approve pins in one queue, then schedule them for the hours your audience is actually scrolling.</p>
+              </div>
+              <div class="feat">
+                <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg></div>
+                <h4>Official Pinterest CSV export</h4>
+                <p>PinMaster exports the exact bulk-upload CSV Pinterest itself provides. You upload it in Pinterest&rsquo;s own tool — no API approval to wait for, no grey-area automation risking your account.</p>
+              </div>
+              <div class="feat">
+                <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10Z"/><path d="M9 12l2 2 4-4"/></svg></div>
+                <h4>Pre-publish checkup</h4>
+                <p>Before anything ships, PinMaster scans for errors and warns you when a new pin is nearly identical to an existing one — so you never waste a slot on a duplicate or a broken pin.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="feat-group">
+            <h3>Track, protect &amp; grow your commissions</h3>
+            <div class="feat-grid">
+              <div class="feat star">
+                <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></div>
+                <h4>Per-pin commission tracking</h4>
+                <p>The feature no competitor has: every ClickBank and Digistore24 postback lands on the pin that earned it — sales added, refunds and chargebacks subtracted. You finally know your winners by name.</p>
+                <span class="tag">Only in PinMaster AI</span>
+              </div>
+              <div class="feat">
+                <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+                <h4>Clone your winners</h4>
+                <p>Found a pin that prints commissions? Duplicate its formula into fresh variations in a few clicks, and let proven angles carry next month&rsquo;s revenue too.</p>
+              </div>
+              <div class="feat">
+                <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+                <h4>Commission leak scan</h4>
+                <p>PinMaster hunts for the quiet money-losers: pins driving clicks that never turn into tracked commissions, so you can fix the leak instead of funding it.</p>
+              </div>
+              <div class="feat">
+                <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></div>
+                <h4>Dead link checker</h4>
+                <p>A dead product link means free traffic for the merchant and zero for you. PinMaster checks your links and flags the dead ones before they drain another week of clicks.</p>
+              </div>
+              <div class="feat">
+                <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></div>
+                <h4>Old-pin refresh cycles</h4>
+                <p>Good pins shouldn&rsquo;t retire. PinMaster resurfaces your older pins as fresh drafts on a cycle, so proven content keeps earning instead of gathering dust.</p>
+              </div>
+              <div class="feat">
+                <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M12 12l1.2 2.4 2.6.4-1.9 1.8.5 2.6L12 18l-2.4 1.2.5-2.6-1.9-1.8 2.6-.4L12 12Z"/></svg></div>
+                <h4>Seasonal calendar built in</h4>
+                <p>Black Friday, Christmas, Tet and the rest of the buying year are already on your calendar — with time to prepare pin sets before the rush, not during it.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="feat-group">
+            <h3>Start every day already knowing</h3>
+            <div class="feat-grid">
+              <div class="feat">
+                <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></div>
+                <h4>Your morning digest</h4>
+                <p>Open the app to an automatic daily brief: new commissions, pins waiting for your approval, dead links to fix, winners to clone. Coffee in hand, plan already made.</p>
+              </div>
+              <div class="feat">
+                <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+                <h4>Your data stays on your machine</h4>
+                <p>PinMaster is a Windows desktop app. Your products, pins and commission data live on your computer — not on someone else&rsquo;s server, not one outage away from gone.</p>
+              </div>
+              <div class="feat">
+                <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h9M8 5v3c0 3-2 5.5-4 7"/><path d="M6 11c1 2.5 3.5 5 6 6"/><path d="M13 21l4.5-10L22 21M14.8 17h5.4"/></svg></div>
+                <h4>English &amp; Vietnamese interface</h4>
+                <p>Work in the language you think in. The full interface switches between English and Vietnamese whenever you do.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= HOW IT WORKS ================= -->
+      <section class="alt" id="how">
+        <div class="wrap">
+          <div class="sec-head">
+            <h2>From product list to proven profit in four steps</h2>
+            <p>No API applications. No waiting rooms. Here is your first week with PinMaster AI.</p>
+          </div>
+          <div class="steps">
+            <div class="step"><div class="num">1</div><h3>Bring your products</h3><p>Import a CSV or paste your product list. That&rsquo;s the raw material — PinMaster takes it from here.</p></div>
+            <div class="step"><div class="num">2</div><h3>Let AI draft, you approve</h3><p>Each product becomes up to 7 pins with AI-written titles and descriptions. You review them in one queue and schedule the best hours.</p></div>
+            <div class="step"><div class="num">3</div><h3>Export &amp; upload the official way</h3><p>Download the bulk-upload CSV and post it through Pinterest&rsquo;s own tool. Checked for errors and near-duplicates before it ever leaves your desk.</p></div>
+            <div class="step"><div class="num">4</div><h3>Watch each pin earn — or not</h3><p>Postbacks from ClickBank and Digistore24 land on the exact pin responsible. Clone the winners, fix the leaks, repeat what pays.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PRICING ================= -->
+      <section id="pricing">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="kicker">Pricing</span>
+            <h2>One winning pin can pay for a year of this</h2>
+            <p>Every plan starts with a free 14-day trial — no card required. You&rsquo;ll know exactly what your pins earn long before you pay a cent.</p>
+          </div>
+
+          <div class="founding" style="margin-bottom:56px">
+            <div>
+              <span class="kicker gold">Founding offer</span>
+              <h2>The first 100 customers lock Pro at <span class="gold">$39/month — for 24 months</span></h2>
+              <p>When the founding spots are gone, Pro goes back to $59/month and stays there. Founding members keep $39 locked for a full two years, renewals included.</p>
+            </div>
+            <div class="founding-price">
+              <div class="was">Pro list price <s>$59/mo</s></div>
+              <div class="now">$39<small>/mo</small></div>
+              <div class="lock">Price locked for 24 months</div>
+              <a class="btn btn-orange" href="#plans" style="width:100%">Claim a founding spot</a>
+              <div class="spots">100 founding spots total · first come, first served</div>
+            </div>
+          </div>
+
+          <div class="toggle" id="plans">
+            <span>Monthly</span>
+            <label class="switch">
+              <input type="checkbox" id="billingToggle" aria-label="Toggle annual billing" />
+            </label>
+            <span>Annual</span>
+            <span class="save">2 months free</span>
+          </div>
+
+          <div class="plans">
+            <div class="plan">
+              <h3>Solo</h3>
+              <p class="who">For one affiliate turning a side project into a system.</p>
+              <div class="price"><span class="amt" data-monthly="$29" data-annual="$290">$29</span><span class="per" data-monthly="/month" data-annual="/year">/month</span></div>
+              <p class="bill-note" data-monthly="Billed monthly. Cancel anytime." data-annual="Billed annually — 10 × monthly, 2 months free.">Billed monthly. Cancel anytime.</p>
+              <a class="btn btn-ghost" href="#support">Start free 14-day trial</a>
+            </div>
+
+            <div class="plan pro">
+              <span class="badge">Most popular</span>
+              <h3>Pro</h3>
+              <p class="who">For full-time pin marketers who live on their numbers.</p>
+              <div class="price"><span class="amt" data-monthly="$59" data-annual="$590">$59</span><span class="per" data-monthly="/month" data-annual="/year">/month</span></div>
+              <p class="bill-note" data-monthly="Billed monthly. Cancel anytime." data-annual="Billed annually — 10 × monthly, 2 months free.">Billed monthly. Cancel anytime.</p>
+              <p class="founding-note">Founding members: <strong>$39/mo</strong> instead of <s>$59/mo</s>, locked for 24 months — first 100 customers only.</p>
+              <a class="btn btn-orange" href="#support">Start free 14-day trial</a>
+            </div>
+
+            <div class="plan">
+              <h3>Agency</h3>
+              <p class="who">For operators running Pinterest affiliate at team scale.</p>
+              <div class="price"><span class="amt" data-monthly="$119" data-annual="$1,190">$119</span><span class="per" data-monthly="/month" data-annual="/year">/month</span></div>
+              <p class="bill-note" data-monthly="Billed monthly. Cancel anytime." data-annual="Billed annually — 10 × monthly, 2 months free.">Billed monthly. Cancel anytime.</p>
+              <a class="btn btn-ghost" href="#support">Start free 14-day trial</a>
+            </div>
+          </div>
+          <p class="trial-note">All prices in USD. Every plan: 14-day free trial, no card required.</p>
+
+          <div class="included">
+            <h3>What PinMaster AI does for you</h3>
+            <ul>
+              <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Per-pin commission tracking (ClickBank + Digistore24)</li>
+              <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Official Pinterest bulk-upload CSV export</li>
+              <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Pre-publish error check &amp; near-duplicate warnings</li>
+              <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Review queue — nothing publishes without your OK</li>
+              <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Data stored on your own machine</li>
+              <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>English &amp; Vietnamese interface</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= GUARANTEE ================= -->
+      <section class="alt" id="guarantee">
+        <div class="wrap">
+          <div class="guarantee">
+            <div>
+              <div class="seal"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10Z"/><path d="M9 12l2 2 4-4"/></svg></div>
+              <h2>30-day money-back guarantee — with honest conditions</h2>
+              <p class="lead">We would rather spell out exactly when you get your money back than hide behind a vague promise. Here it is, in plain English, before you pay anything.</p>
+            </div>
+            <div class="g-cols">
+              <div>
+                <h3>You get a full refund if…</h3>
+                <ul class="yes">
+                  <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>The software won&rsquo;t run on your computer</strong> and our support team has genuinely tried and couldn&rsquo;t fix it.</span></li>
+                  <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>A core feature advertised on this page doesn&rsquo;t work</strong> as described.</span></li>
+                  <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>You bought twice by mistake,</strong> or picked the wrong plan.</span></li>
+                  <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Your license key was never activated.</strong></span></li>
+                </ul>
+              </div>
+              <div>
+                <h3>And one honest exception</h3>
+                <ul class="no">
+                  <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg><span>If the key <strong>has been activated and genuinely used</strong>, a simple change of mind isn&rsquo;t covered. That&rsquo;s exactly why the 14-day free trial exists — test everything first, with no card and no risk.</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= FAQ ================= -->
+      <section id="faq">
+        <div class="wrap">
+          <div class="sec-head">
+            <h2>Questions you&rsquo;re probably asking right now</h2>
+            <p>Straight answers, no fine print. Anything else — our support team is one message away, below.</p>
+          </div>
+          <div class="faq-list">
+            <div class="faq">
+              <button type="button" aria-expanded="false">Do I need Pinterest API approval to use PinMaster AI?<span class="chev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+              <div class="answer"><p>No. PinMaster AI exports the official bulk-upload CSV that Pinterest itself provides, and you upload it through Pinterest&rsquo;s own tool. There is no API application, no approval process, and no waiting period — you can publish your first batch the day you install it.</p></div>
+            </div>
+            <div class="faq">
+              <button type="button" aria-expanded="false">Does PinMaster AI post to Pinterest automatically?<span class="chev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+              <div class="answer"><p>No — and that&rsquo;s deliberate. PinMaster builds, checks and schedules your pins, then hands you the official CSV to upload in Pinterest&rsquo;s bulk tool. Your account stays on the path Pinterest itself offers, instead of relying on automation Pinterest never approved.</p></div>
+            </div>
+            <div class="faq">
+              <button type="button" aria-expanded="false">How does per-pin commission tracking actually work?<span class="chev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+              <div class="answer"><p>Each pin carries its own tracking tag. When ClickBank or Digistore24 records a sale, the network sends a postback that PinMaster matches to the exact pin behind it. Sales add to that pin&rsquo;s total; refunds and chargebacks subtract from it. What you see per pin is the net commission you actually keep.</p></div>
+            </div>
+            <div class="faq">
+              <button type="button" aria-expanded="false">What computer does PinMaster AI run on?<span class="chev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+              <div class="answer"><p>PinMaster AI is a desktop app for Windows. Install it on your Windows PC and it runs locally — no browser tabs to babysit, no cloud workspace to rent.</p></div>
+            </div>
+            <div class="faq">
+              <button type="button" aria-expanded="false">Where does my data live?<span class="chev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+              <div class="answer"><p>On your machine. Your products, pins, schedules and commission records are stored locally by the desktop app. Your business data isn&rsquo;t sitting on our servers.</p></div>
+            </div>
+            <div class="faq">
+              <button type="button" aria-expanded="false">Do I need my own AI key for the writing features?<span class="chev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+              <div class="answer"><p>Yes — PinMaster AI uses a bring-your-own-key (BYOK) model. You connect your own AI provider key, the AI writes your titles and descriptions, and you pay your provider directly at cost. No marked-up credit bundles, and your key stays yours.</p></div>
+            </div>
+            <div class="faq">
+              <button type="button" aria-expanded="false">How do I reach support?<span class="chev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+              <div class="answer"><p>Two ways: email us at support@pinmasterai.com, or message our Telegram support chat — you&rsquo;ll also find both inside the app, in the Support tab. Email is the official channel for anything involving billing or refunds, so there&rsquo;s always a written record.</p></div>
+            </div>
+            <div class="faq">
+              <button type="button" aria-expanded="false">What&rsquo;s the refund policy, in one paragraph?<span class="chev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+              <div class="answer"><p>You have 30 days. You&rsquo;re covered if the software won&rsquo;t run on your machine and support can&rsquo;t fix it, if a core advertised feature doesn&rsquo;t work, if you bought twice or chose the wrong plan by mistake, or if your key was never activated. If the key was activated and genuinely used, a change of mind isn&rsquo;t refundable — use the free 14-day trial to decide first. Full summary in the <a href="#guarantee">guarantee section</a> above.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SUPPORT ================= -->
+      <section class="alt" id="support">
+        <div class="wrap">
+          <div class="sec-head">
+            <h2>Real support, from the team that built it</h2>
+            <p>Stuck at midnight before a big seasonal push? You don&rsquo;t open a ticket into the void — you reach us on one of these two channels.</p>
+          </div>
+          <div class="support-grid">
+            <div class="support-card">
+              <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg></div>
+              <h3>Email support</h3>
+              <p>The official channel — best for billing, refunds, and anything you want in writing.</p>
+              <a class="addr" href="mailto:support@pinmasterai.com">support@pinmasterai.com</a>
+            </div>
+            <div class="support-card">
+              <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/></svg></div>
+              <h3>Telegram support</h3>
+              <p>The fast lane for quick questions. Open the Support tab inside PinMaster AI and it takes you straight to our Telegram support chat.</p>
+              <span class="addr" style="color:var(--ink)">PinMaster AI Support · in the app&rsquo;s Support tab</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= FINAL CTA ================= -->
+      <section class="final">
+        <div class="wrap">
+          <h2>Your next winning pin is already out there. <span class="hl">Find out which one it is.</span></h2>
+          <p>Fourteen free days is enough to see your first per-pin commission report — and once you&rsquo;ve seen exactly which pins pay you, you&rsquo;ll never publish blind again.</p>
+          <a class="btn btn-orange" href="#pricing">Start free 14-day trial</a>
+          <div class="note">No card required · Windows desktop app · 30-day money-back guarantee</div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot">
+          <nav aria-label="Footer">
+            <a href="#features">Features</a>
+            <a href="#how">How it works</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#guarantee">Guarantee</a>
+            <a href="#faq">FAQ</a>
+            <a href="#support">Support</a>
+          </nav>
+          <a href="mailto:support@pinmasterai.com" style="font-weight:700;font-size:14.5px;text-decoration:none;padding:8px 2px">support@pinmasterai.com</a>
+        </div>
+        <p class="legal">© 2026 PinMaster AI. PinMaster AI is an independent desktop tool and is not affiliated with or endorsed by Pinterest, Inc., ClickBank, or Digistore24. Pinterest is a trademark of Pinterest, Inc.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Billing toggle: swap amounts, per-labels and billing notes.
+      (function () {
+        var toggle = document.getElementById('billingToggle');
+        if (!toggle) return;
+        toggle.addEventListener('change', function () {
+          var mode = toggle.checked ? 'annual' : 'monthly';
+          document.querySelectorAll('[data-monthly]').forEach(function (el) {
+            el.textContent = el.getAttribute('data-' + mode);
+          });
+        });
+      })();
+
+      // FAQ accordion: one open at a time.
+      (function () {
+        var items = document.querySelectorAll('.faq');
+        items.forEach(function (item) {
+          var btn = item.querySelector('button');
+          btn.addEventListener('click', function () {
+            var wasOpen = item.classList.contains('open');
+            items.forEach(function (i) {
+              i.classList.remove('open');
+              i.querySelector('button').setAttribute('aria-expanded', 'false');
+            });
+            if (!wasOpen) {
+              item.classList.add('open');
+              btn.setAttribute('aria-expanded', 'true');
+            }
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
